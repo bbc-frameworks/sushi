@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="sushi" default="all" basedir=".">
+
+	<!-- PROPERTIES -->
+
+	<property file="build.properties" />
+	<property name="NAME" value="sushi" />
+	
+	<property name="ROOT_DIR"     value="." />
+	<property name="COMPAT_LEVEL" value="amaebi" />
+	<property name="BUILD_DIR"    value="${ROOT_DIR}/build/" />
+	<property name="TEMP_DIR"     value="${BUILD_DIR}/temp/" />
+	<property name="DIST_DIR"     value="${ROOT_DIR}/dist/${COMPAT_LEVEL}/" />
+
+	<!-- TARGETS -->
+	
+	<target name="clean">
+		<echo message="Deleting previously built files &amp; directories" />
+		<delete dir="${BUILD_DIR}/temp" />
+		<delete dir="${ROOT_DIR}/dist" />
+	</target>
+	
+	<target name="setup">
+		<echo message="Setting up files &amp; directories" />
+		<mkdir dir="${BUILD_DIR}/temp" />
+		<mkdir dir="${ROOT_DIR}/dist" />
+	</target>
+	
+	<target name="deps">
+		<echo message="Retrieving external dependencies" />
+		<get dest="${TEMP_DIR}/require.js" src="${REQUIRE_URL}" />
+		
+		<get dest="${TEMP_DIR}/jquery.js" src="${JQUERY_URL}" />
+		
+		<!--tempfile property="temp.zip" suffix=".zip" deleteonexit="yes" />
+		<delete dir="${JQUERYUI_DIR}" />
+		<mkdir dir="${JQUERYUI_DIR}" />
+		<get dest="${temp.zip}" src="${JQUERYUI_URL}" />
+		<unzip dest="${JQUERYUI_DIR}" src="${temp.zip}">
+			<regexpmapper from="^[^\/]*\/ui/(.*)" to="\1"/>
+		</unzip-->
+	</target>
+	
+	<target name = "patch" >
+		<concat destfile="${DIST_DIR}/../require.js" fixlastline = "yes" >
+			<filelist dir="."
+						files="${BUILD_DIR}/templates/require.top.txt
+								${TEMP_DIR}/require.js
+								${BUILD_DIR}/templates/require.tail.txt" />
+		</concat>
+		
+		<concat destfile="${DIST_DIR}/jquery.js" fixlastline = "yes" >
+			<filelist dir="."
+						files="${BUILD_DIR}/templates/jquery.top.txt
+								${TEMP_DIR}/jquery.js
+								${BUILD_DIR}/templates/jquery.tail.txt" />
+		</concat>
+		
+		<replace file="${DIST_DIR}/jquery.js" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
+	</target>
+		
+	
+	<target name="all" depends="clean, setup, deps, patch">
+		<echo message="" />
+		<echo message="**************************************" />
+		<echo message="Sushi version ${COMPAT_LEVEL} build complete" />
+		<echo message="**************************************" />
+		<echo message="" />
+	</target>
+	
+</project>
