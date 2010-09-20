@@ -10,8 +10,11 @@
 	<property name="ROOT_DIR"     value="." />
 	<property name="COMPAT_LEVEL" value="amaebi" />
 	<property name="BUILD_DIR"    value="${ROOT_DIR}/build/" />
+	<property name="TEMPLATES_DIR"  value="${BUILD_DIR}/templates/" />
 	<property name="TEMP_DIR"     value="${BUILD_DIR}/temp/" />
-	<property name="DIST_DIR"     value="${ROOT_DIR}/dist/${COMPAT_LEVEL}/" />
+	
+	<property name="TARGET_DIR"  value="${ROOT_DIR}/dist" />
+	<property name="DIST_DIR"     value="${TARGET_DIR}/${COMPAT_LEVEL}/" />
 
 	<!-- TARGETS -->
 	
@@ -43,24 +46,24 @@
 	</target>
 	
 	<target name = "patch" >
+		<echo message="Patching dependencies" />
 		<concat destfile="${DIST_DIR}/../require.js" fixlastline = "yes" >
-			<filelist dir="."
-						files="${BUILD_DIR}/templates/require.top.txt
-								${TEMP_DIR}/require.js
-								${BUILD_DIR}/templates/require.tail.txt" />
+			<filelist dir="${ROOT_DIR}"
+						files="build/templates/require.top.txt
+								build/temp/require.js
+								build/templates/require.tail.txt" />
 		</concat>
 		
 		<concat destfile="${DIST_DIR}/jquery.js" fixlastline = "yes" >
-			<filelist dir="."
-						files="${BUILD_DIR}/templates/jquery.top.txt
-								${TEMP_DIR}/jquery.js
-								${BUILD_DIR}/templates/jquery.tail.txt" />
+			<filelist dir="${ROOT_DIR}"
+						files="build/templates/jquery.top.txt
+								build/temp/jquery.js
+								build/templates/jquery.tail.txt" />
 		</concat>
 		
 		<replace file="${DIST_DIR}/jquery.js" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
 	</target>
 		
-	
 	<target name="all" depends="clean, setup, deps, patch">
 		<echo message="" />
 		<echo message="**************************************" />
