@@ -47,14 +47,14 @@
 	
 	<target name = "patch" >
 		<echo message="Patching dependencies" />
-		<concat destfile="${DIST_DIR}/../require.js" fixlastline = "yes" >
+		<concat destfile="${DIST_DIR}/../require.js" fixlastline="yes">
 			<filelist dir="${ROOT_DIR}"
 						files="build/templates/require.top.txt
 								build/temp/require.js
 								build/templates/require.tail.txt" />
 		</concat>
 		
-		<concat destfile="${DIST_DIR}/jquery.js" fixlastline = "yes" >
+		<concat destfile="${DIST_DIR}/jquery.js" fixlastline="yes">
 			<filelist dir="${ROOT_DIR}"
 						files="build/templates/jquery.top.txt
 								build/temp/jquery.js
