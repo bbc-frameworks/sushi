@@ -78,6 +78,7 @@
 		<echo message="" />
 	</target>
 	
+	<!-- <target name="_all" depends="clean"> -->
 	<target name="_all">
 		<echo message="" />
 		<echo message="**************************************" />
@@ -86,7 +87,7 @@
 		<echo message="**************************************" />
 		<echo message="" />
 		
-		<sushi source="http://blah.com/code.zip" target="jquery.js" />
+		<sushi source="http://blah.com/code.zip" target="jquery.js" path="/.." />
 		
 	</target>
 	
@@ -94,10 +95,11 @@
 	<macrodef name="sushi">
 		<attribute name="source" />
 		<attribute name="target" />
+		<attribute name="path" default="" />
 		<sequential>
 			<echo message="**** Making new sushi ****************" />
 			<sushi-get source="@{source}" />
-			<sushi-patch target="@{target}" />
+			<sushi-patch target="@{target}" path="@{path}" />
 		</sequential>
 	</macrodef>
 	
@@ -113,18 +115,19 @@
 	
 	<macrodef name="sushi-patch">
 		<attribute name="target" />
+		<attribute name="path" />
 		<sequential>
 			<echo>Patching @{target}</echo>
 			
 			<echo message="Patching dependencies" />
-			<concat destfile="${DIST_DIR}/@{target}" fixlastline="yes">
+			<concat destfile="${DIST_DIR}@{path}/@{target}" fixlastline="yes">
 				<filelist dir="${ROOT_DIR}"
 							files="build/templates/@{target}.top.txt
 									build/temp/temp.file
 									build/templates/@{target}.tail.txt" />
 			</concat>
 			
-			<replace file="${DIST_DIR}/@{target}" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
+			<replace file="${DIST_DIR}@{path}/@{target}" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
 		</sequential>
 	</macrodef>
 	
