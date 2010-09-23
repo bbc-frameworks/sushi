@@ -7,14 +7,15 @@
 	<property file="build.properties" />
 	<property name="NAME" value="sushi" />
 	
-	<property name="ROOT_DIR"     value="." />
-	<property name="COMPAT_LEVEL" value="amaebi" />
-	<property name="BUILD_DIR"    value="${ROOT_DIR}/build/" />
-	<property name="TEMPLATES_DIR"  value="${BUILD_DIR}/templates/" />
-	<property name="TEMP_DIR"     value="${BUILD_DIR}/temp/" />
+	<property name="ROOT_DIR"      value="." />
+	<property name="COMPAT_LEVEL"  value="amaebi" />
+	<property name="BUILD_DIR"     value="${ROOT_DIR}/build/" />
+	<property name="TEST_DIR"      value="${ROOT_DIR}/test/" />
+	<property name="TEMPLATES_DIR" value="${BUILD_DIR}/templates/" />
+	<property name="TEMP_DIR"      value="${BUILD_DIR}/temp/" />
 	
-	<property name="TARGET_DIR"  value="${ROOT_DIR}/dist" />
-	<property name="DIST_DIR"     value="${TARGET_DIR}/${COMPAT_LEVEL}/" />
+	<property name="TARGET_DIR"    value="${ROOT_DIR}/dist" />
+	<property name="DIST_DIR"      value="${TARGET_DIR}/${COMPAT_LEVEL}/" />
 
 	<!-- TARGETS -->
 	
@@ -63,8 +64,15 @@
 		
 		<replace file="${DIST_DIR}/jquery.js" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
 	</target>
+	
+	<target name = "testable">
+		<mkdir dir="${TEST_DIR}/${COMPAT_LEVEL}" />
+		<copy todir="${TEST_DIR}/${COMPAT_LEVEL}">
+			<fileset dir="${DIST_DIR}" />
+		</copy>
+	</target>
 		
-	<target name="all" depends="clean, setup, deps, patch">
+	<target name="all" depends="clean, setup, deps, patch, testable">
 		<echo message="" />
 		<echo message="**************************************" />
 		<echo message="Sushi version ${COMPAT_LEVEL} build complete" />
