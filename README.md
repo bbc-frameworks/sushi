@@ -12,7 +12,7 @@ The build has been designed to run both directly or form part of a larger build.
 
 ## Usage
 
-To use Sushi, simply import the `sushsi.xml` into your Ant `build.xml`.
+To use Sushi, simply import the `sushi.xml` into your Ant `build.xml`.
 
 Define the `package` task and add use the `<sushi />` element to add new targets.
 
