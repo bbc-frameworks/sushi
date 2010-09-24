@@ -54,12 +54,12 @@
     
     <macrodef name="sushi">
         <attribute name="source" />
-        <attribute name="target" />
+        <attribute name="id" />
         <attribute name="path" default="" />
         <sequential>
             <echo message="**** Making new sushi ****************" />
             <sushi-get source="@{source}" />
-            <sushi-patch target="@{target}" path="@{path}" />
+            <sushi-patch id="@{id}" path="@{path}" />
         </sequential>
     </macrodef>
     
@@ -72,20 +72,20 @@
     </macrodef>
     
     <macrodef name="sushi-patch">
-        <attribute name="target" />
+        <attribute name="id" />
         <attribute name="path" />
         <sequential>
-            <echo>Patching @{target}</echo>
+            <echo>Patching @{id}</echo>
             
             <echo message="Patching dependencies" />
-            <concat destfile="${DIST_DIR}@{path}/@{target}" fixlastline="yes">
+            <concat destfile="${TARGET_DIR}@{path}/@{id}.js" fixlastline="yes">
                 <filelist dir="${ROOT_DIR}"
-                            files="build/templates/@{target}.top.txt
+                            files="build/templates/@{id}.top.txt
                                     build/temp/temp.file
-                                    build/templates/@{target}.tail.txt" />
+                                    build/templates/@{id}.tail.txt" />
             </concat>
             
-            <replace file="${DIST_DIR}@{path}/@{target}" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
+            <replace file="${TARGET_DIR}@{path}/@{id}.js" token="@COMPAT_LEVEL@" value="@{id}"/>
         </sequential>
     </macrodef>
 </project>

@@ -5,9 +5,7 @@
 	<import file="sushi.xml" />
 	
 	<target name="package">
-		
 		<sushi source="${REQUIRE_URL}" id="require" />
 		<sushi source="${JQUERY_URL}"  id="jquery-1.4" />
-		
 	</target>
 </project>
