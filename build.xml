@@ -43,7 +43,8 @@
 		<echo message="**************************************" />
 		<echo message="" />
 		
-		<sushi source="http://code.jquery.com/jquery-1.4.2.js" target="jquery.js" />
+		<sushi source="${REQUIRE_URL}" target="jquery.js"  path="../"/>
+		<sushi source="${JQUERY_URL}" target="jquery.js" />
 		
 	</target>
 	
