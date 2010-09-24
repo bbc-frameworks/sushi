@@ -23,7 +23,7 @@ Define the `package` task and add use the `<sushi />` element to add new targets
         
         <target name="package">
             
-            <sushi source="http://code.jquery.com/jquery-1.4.2.js" target="jquery.js" />
+            <sushi source="http://code.jquery.com/jquery-1.4.2.js" id="jquery-1.4" />
             
         </target>
     </project>
