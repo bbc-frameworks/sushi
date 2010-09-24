@@ -4,5 +4,5 @@
 	BBC SUSHI: bottom
  ******************************************************************************/
 if (typeof require !== 'undefined') {
-	require.def( '@COMPAT_LEVEL@', function() { return jQuery.noConflict(true) });
+	require.def( '@ID@', function() { return jQuery.noConflict(true) });
 }

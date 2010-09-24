@@ -96,7 +96,7 @@
                                     build/templates/@{id}.tail.txt" />
             </concat>
             
-            <replace file="${TARGET_DIR}@{path}/@{id}.js" token="@COMPAT_LEVEL@" value="@{id}"/>
+            <replace file="${TARGET_DIR}@{path}/@{id}.js" token="@ID@" value="@{id}"/>
         </sequential>
     </macrodef>
 </project>
