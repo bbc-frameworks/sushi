@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="sushi" default="all" basedir=".">
+    
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="build/lib/ant-contrib-1.0b2.jar"/>
+        </classpath>
+    </taskdef>
+    
+    <!-- PROPERTIES -->
+    
+    <property file="build.properties" />
+    <property name="NAME" value="sushi" />
+    
+    <property name="ROOT_DIR"      value="." />
+    <property name="COMPAT_LEVEL"   value="amaebi" />
+    <property name="BUILD_DIR"    value="${ROOT_DIR}/build/" />
+    <property name="TEMPLATES_DIR"  value="${BUILD_DIR}/templates/" />
+    <property name="TEMP_DIR"      value="${BUILD_DIR}/temp/" />
+    
+    <property name="TARGET_DIR"  value="${ROOT_DIR}/dist" />
+    <property name="DIST_DIR"      value="${TARGET_DIR}/${COMPAT_LEVEL}/" />
+    
+    <!-- TARGETS -->
+    
+    
+    <target name="clean">
+        <echo message="" />
+        <echo message="**************************************" />
+        <echo message="Sushi version ${COMPAT_LEVEL}" />
+        <echo message="**************************************" />
+        <echo message="" />
+        
+        <echo message="Deleting previously built files &amp; directories" />
+        <delete dir="${BUILD_DIR}/temp" />
+        <delete dir="${ROOT_DIR}/dist" />
+    </target>
+    
+    <target name="setup">
+        <echo message="Setting up files &amp; directories" />
+        <mkdir dir="${BUILD_DIR}/temp" />
+        <mkdir dir="${ROOT_DIR}/dist" />
+    </target>
+    
+    
+    <target name="all" depends="clean, setup, package">
+        <echo message="" />
+        <echo message="**************************************" />
+        <echo message="Sushi build complete" />
+        <echo message="**************************************" />
+        <echo message="" />
+    </target>
+    
+    <macrodef name="sushi">
+        <attribute name="source" />
+        <attribute name="target" />
+        <attribute name="path" default="" />
+        <sequential>
+            <echo message="**** Making new sushi ****************" />
+            <sushi-get source="@{source}" />
+            <sushi-patch target="@{target}" path="@{path}" />
+        </sequential>
+    </macrodef>
+    
+    <macrodef name="sushi-get">
+        <attribute name="source" />
+        <sequential>
+            <echo>Downloading @{source}</echo>
+            <get dest="${TEMP_DIR}/temp.file" src="@{source}" />
+        </sequential>
+    </macrodef>
+    
+    <macrodef name="sushi-patch">
+        <attribute name="target" />
+        <attribute name="path" />
+        <sequential>
+            <echo>Patching @{target}</echo>
+            
+            <echo message="Patching dependencies" />
+            <concat destfile="${DIST_DIR}@{path}/@{target}" fixlastline="yes">
+                <filelist dir="${ROOT_DIR}"
+                            files="build/templates/@{target}.top.txt
+                                    build/temp/temp.file
+                                    build/templates/@{target}.tail.txt" />
+            </concat>
+            
+            <replace file="${DIST_DIR}@{path}/@{target}" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
+        </sequential>
+    </macrodef>
+</project>
