@@ -43,8 +43,19 @@
         <mkdir dir="${ROOT_DIR}/dist" />
     </target>
     
+    <target name="test">
+		<echo message="Setting up tests" />
     
-    <target name="all" depends="clean, setup, package">
+		<copy todir="${ROOT_DIR}/test/area">
+			<fileset dir="${ROOT_DIR}/dist">
+				<include name="**/*.js" />
+				<include name="**/*.css" />
+			</fileset>
+			<!--mapper type="regexp" from="(.*)\.(js|css)" to="\1.debug.\2"/-->
+		</copy>
+	</target>
+	
+    <target name="all" depends="clean, setup, package, test">
         <echo message="" />
         <echo message="**************************************" />
         <echo message="Sushi build complete" />

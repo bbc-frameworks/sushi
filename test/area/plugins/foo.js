@@ -17,9 +17,9 @@
 
 
 require.modify(
-    'amaebi/jquery',
+    'jquery-1.4',
     'plugins/foo',
-    ['amaebi/jquery'],
+    ['jquery-1.4'],
     function(jQuery) {
 
 /******* start plugin code *****/

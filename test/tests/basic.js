@@ -6,12 +6,11 @@ QUnit.specify('Loading Javascript modules.', function() {
 		it('should pass a jQuery object into the callback', function() {
 			expect(9);
 			
-			
 			stop(3000); // start asynchronous test
 			
 			require(
-				{ baseUrl: 'test' },
-				['amaebi/jquery'],
+				{ baseUrl: 'area' },
+				['jquery-1.4'],
 				function(myJquery) {
 					assert(window.myJquery).isUndefined('loaded modules should not appear in the global scope');
 					assert(myJquery).isDefined('loaded modules should be passed into the callback');
@@ -47,8 +46,8 @@ QUnit.specify('Loading Javascript modules.', function() {
 			stop(3000); // start asynchronous test
 			
 			require(
-				{ baseUrl: 'test' },
-				['amaebi/jquery', 'plugins/foo'],
+				{ baseUrl: 'area' },
+				['jquery-1.4', 'plugins/foo'],
 				function(/*function*/myJquery, /*undefined*/foo) {
 					assert(myJquery).isDefined('the jQuery function should be passed into the callback');
 					assert(foo).isUndefined('plugins should not be passed into the callback');
