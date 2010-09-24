@@ -13,14 +13,14 @@
 	<property file="build.properties" />
 	<property name="NAME" value="sushi" />
 	
-	<property name="ROOT_DIR"	 value="." />
-	<property name="COMPAT_LEVEL" value="amaebi" />
-	<property name="BUILD_DIR"	value="${ROOT_DIR}/build/" />
-	<property name="TEMPLATES_DIR"  value="${BUILD_DIR}/templates/" />
-	<property name="TEMP_DIR"	 value="${BUILD_DIR}/temp/" />
+	<property name="ROOT_DIR"		value="." />
+	<property name="COMPAT_LEVEL"	value="amaebi" />
+	<property name="BUILD_DIR"		value="${ROOT_DIR}/build/" />
+	<property name="TEMPLATES_DIR"	value="${BUILD_DIR}/templates/" />
+	<property name="TEMP_DIR"		value="${BUILD_DIR}/temp/" />
 	
-	<property name="TARGET_DIR"  value="${ROOT_DIR}/dist" />
-	<property name="DIST_DIR"	 value="${TARGET_DIR}/${COMPAT_LEVEL}/" />
+	<property name="TARGET_DIR"		value="${ROOT_DIR}/dist" />
+	<property name="DIST_DIR"		value="${TARGET_DIR}/${COMPAT_LEVEL}/" />
 
 	<!-- TARGETS -->
 	
@@ -35,62 +35,25 @@
 		<mkdir dir="${BUILD_DIR}/temp" />
 		<mkdir dir="${ROOT_DIR}/dist" />
 	</target>
-	
-	<target name="deps">
-		<echo message="Retrieving external dependencies" />
-		<get dest="${TEMP_DIR}/require.js" src="${REQUIRE_URL}" />
 		
-		<get dest="${TEMP_DIR}/jquery.js" src="${JQUERY_URL}" />
-		
-		<!--tempfile property="temp.zip" suffix=".zip" deleteonexit="yes" />
-		<delete dir="${JQUERYUI_DIR}" />
-		<mkdir dir="${JQUERYUI_DIR}" />
-		<get dest="${temp.zip}" src="${JQUERYUI_URL}" />
-		<unzip dest="${JQUERYUI_DIR}" src="${temp.zip}">
-			<regexpmapper from="^[^\/]*\/ui/(.*)" to="\1"/>
-		</unzip-->
-	</target>
-	
-	<target name = "patch" >
-		<echo message="Patching dependencies" />
-		<concat destfile="${DIST_DIR}/../require.js" fixlastline="yes">
-			<filelist dir="${ROOT_DIR}"
-						files="build/templates/require.top.txt
-								build/temp/require.js
-								build/templates/require.tail.txt" />
-		</concat>
-		
-		<concat destfile="${DIST_DIR}/jquery.js" fixlastline="yes">
-			<filelist dir="${ROOT_DIR}"
-						files="build/templates/jquery.top.txt
-								build/temp/jquery.js
-								build/templates/jquery.tail.txt" />
-		</concat>
-		
-		<replace file="${DIST_DIR}/jquery.js" token="@COMPAT_LEVEL@" value="${COMPAT_LEVEL}"/>
-	</target>
-		
-	<target name="all" depends="clean, setup, deps, patch">
+	<target name="package">
 		<echo message="" />
 		<echo message="**************************************" />
-		<echo message="Sushi version ${COMPAT_LEVEL} build complete" />
-		<echo message="**************************************" />
-		<echo message="" />
-	</target>
-	
-	<!-- <target name="_all" depends="clean"> -->
-	<target name="_all">
-		<echo message="" />
-		<echo message="**************************************" />
-		<echo message="Sushi version ${COMPAT_LEVEL} build complete" />
-		<echo message=" - branch" />
+		<echo message="Sushi version ${COMPAT_LEVEL}" />
 		<echo message="**************************************" />
 		<echo message="" />
 		
-		<sushi source="http://blah.com/code.zip" target="jquery.js" path="/.." />
+		<sushi source="http://code.jquery.com/jquery-1.4.2.js" target="jquery.js" />
 		
 	</target>
 	
+	<target name="all" depends="clean, setup, package">
+		<echo message="" />
+		<echo message="**************************************" />
+		<echo message="Sushi build complete" />
+		<echo message="**************************************" />
+		<echo message="" />
+	</target>
 	
 	<macrodef name="sushi">
 		<attribute name="source" />
@@ -107,9 +70,7 @@
 		<attribute name="source" />
 		<sequential>
 			<echo>Downloading @{source}</echo>
-			<!-- 
 			<get dest="${TEMP_DIR}/temp.file" src="@{source}" />
-			-->
 		</sequential>
 	</macrodef>
 	
