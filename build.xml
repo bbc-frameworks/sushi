@@ -6,7 +6,7 @@
 	
 	<target name="package">
 		
-		<sushi source="${REQUIRE_URL}" target="jquery.js"  path="../"/>
+		<sushi source="${REQUIRE_URL}" target="require.js"  path="../"/>
 		<sushi source="${JQUERY_URL}" target="jquery.js" />
 		
 	</target>
