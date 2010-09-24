@@ -2,7 +2,7 @@
 
 <project name="sushi" default="all" basedir=".">
 	
-	<import file="base.xml" />
+	<import file="sushi.xml" />
 	
 	<target name="package">
 		
