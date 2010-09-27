@@ -10,7 +10,7 @@
 		
 		<delete dir="${TEMP_DIR}/jqueryui" />
 		<mkdir dir="${TEMP_DIR}/jqueryui" />
-		<tempfile property="temp.zip" suffix=".zip" deleteonexit="yes" />
+		<tempfile property="temp.zip" suffix=".zip" />
 		<get dest="${temp.zip}" src="${JQUERYUI_URL}" />
 		<unzip dest="${TEMP_DIR}/jqueryui" src="${temp.zip}">
 			<regexpmapper from="^[^\/]*\/ui/(.*)" to="\1"/>
@@ -24,5 +24,6 @@
 					   ${TEMP_DIR}/jqueryui/jquery.ui.draggable.js
 					   build/templates/jqueryui.tail.txt" />
 		</concat>
+		<delete file="${temp.zip}" />
 	</target>
 </project>
