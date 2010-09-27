@@ -1,0 +1,7 @@
+require.modify(
+	'jquery-1.4',
+	'plugins/jqueryui-1.8',
+	['jquery-1.4'],
+	function(jQuery) {
+	
+/******* start plugin code *****/

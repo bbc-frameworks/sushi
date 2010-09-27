@@ -7,5 +7,22 @@
 	<target name="package">
 		<sushi source="${REQUIRE_URL}" id="require" />
 		<sushi source="${JQUERY_URL}"  id="jquery-1.4" />
+		
+		<delete dir="${TEMP_DIR}/jqueryui" />
+		<mkdir dir="${TEMP_DIR}/jqueryui" />
+		<tempfile property="temp.zip" suffix=".zip" deleteonexit="yes" />
+		<get dest="${temp.zip}" src="${JQUERYUI_URL}" />
+		<unzip dest="${TEMP_DIR}/jqueryui" src="${temp.zip}">
+			<regexpmapper from="^[^\/]*\/ui/(.*)" to="\1"/>
+		</unzip>
+		<concat destfile="${ROOT_DIR}/test/area/plugins/jqueryui-1.8.js" fixlastline="yes">
+			<filelist dir="${ROOT_DIR}"
+				files="build/templates/jqueryui.top.txt
+					   ${TEMP_DIR}/jqueryui/jquery.ui.core.js
+					   ${TEMP_DIR}/jqueryui/jquery.ui.widget.js
+					   ${TEMP_DIR}/jqueryui/jquery.ui.mouse.js
+					   ${TEMP_DIR}/jqueryui/jquery.ui.draggable.js
+					   build/templates/jqueryui.tail.txt" />
+		</concat>
 	</target>
 </project>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="sushi" default="all" basedir=".">
+<project name="sushietc" default="all" basedir=".">
     
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
         <classpath>
@@ -8,7 +8,7 @@
         </classpath>
     </taskdef>
     
-    <!-- PROPERTIES -->
+    <!-- properties -->
     
     <property file="build.properties" />
     <property name="NAME" value="sushi" />
@@ -22,8 +22,7 @@
     <property name="TARGET_DIR"  value="${ROOT_DIR}/dist" />
     <property name="DIST_DIR"      value="${TARGET_DIR}/${COMPAT_LEVEL}/" />
     
-    <!-- TARGETS -->
-    
+    <!-- targets -->
     
     <target name="clean">
         <echo message="" />
@@ -62,6 +61,8 @@
         <echo message="**************************************" />
         <echo message="" />
     </target>
+    
+    <!-- macros -->
     
     <macrodef name="sushi">
         <attribute name="source" />

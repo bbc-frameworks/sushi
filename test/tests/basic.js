@@ -64,4 +64,28 @@ QUnit.specify('Loading Javascript modules.', function() {
 			);
 		});
 	});
+	
+	describe('Adding jQueryUI to jQuery', function() {
+		it('should be possible to modify the jQuery object with jQueryUI extensions', function() {
+			expect(2);
+			
+			stop(3000); // start asynchronous test
+			
+			require(
+				{ baseUrl: 'area' },
+				['jquery-1.4', 'plugins/jqueryui-1.8'],
+				function(myJquery) {
+					assert(myJquery).isDefined('the jQuery function should be passed into the callback');
+					
+					// is the plugin feature defined?
+					assert(typeof myJquery.ui).equals('object', 'jQueryUI should add a ui object to jQuery');
+					
+					// manual test?
+					myJquery('#test-element').draggable();
+					
+					start(); // end asynchronous test
+				}
+			);
+		});
+	});
 });

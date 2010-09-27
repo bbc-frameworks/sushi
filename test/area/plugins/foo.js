@@ -24,7 +24,7 @@ require.modify(
 
 /******* start plugin code *****/
 
-		//@modifies amaebi/jquery as jQuery
+		//@modifies jquery-1.4 as jQuery
 		(function( $ ){
 			$.fn.foo = function() {
 				return this.each(function() {
