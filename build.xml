@@ -5,6 +5,7 @@
 	<import file="sushi.xml" />
 	
 	<target name="package">
+	
 		<sushi source="${REQUIRE_URL}" id="require" />
 		<sushi source="${JQUERY_URL}"  id="jquery-1.4" />
 		
@@ -13,17 +14,31 @@
 		<tempfile property="temp.zip" suffix=".zip" />
 		<get dest="${temp.zip}" src="${JQUERYUI_URL}" />
 		<unzip dest="${TEMP_DIR}/jqueryui" src="${temp.zip}">
-			<regexpmapper from="^[^\/]*\/ui/(.*)" to="\1"/>
+			<patternset id="sources">
+				 <include name="development-bundle/ui/*.js" />
+			</patternset>
 		</unzip>
-		<concat destfile="${ROOT_DIR}/test/area/plugins/jqueryui-1.8.js" fixlastline="yes">
+		
+		<move todir="${TEMP_DIR}/jqueryui">
+			<fileset dir="${TEMP_DIR}/jqueryui/development-bundle/ui">
+				<include name="*.js"/>
+			</fileset>
+		</move>
+		
+		<mkdir dir="${TARGET_DIR}/plugins" />
+		<concat destfile="${TARGET_DIR}/plugins/jqueryui-1.8.js" fixlastline="yes">
 			<filelist dir="${ROOT_DIR}"
 				files="build/templates/jqueryui.top.txt
-					   ${TEMP_DIR}/jqueryui/jquery.ui.core.js
-					   ${TEMP_DIR}/jqueryui/jquery.ui.widget.js
-					   ${TEMP_DIR}/jqueryui/jquery.ui.mouse.js
-					   ${TEMP_DIR}/jqueryui/jquery.ui.draggable.js
+					   build/temp/jqueryui/jquery.ui.core.js
+					   build/temp/jqueryui/jquery.ui.widget.js
+					   build/temp/jqueryui/jquery.ui.mouse.js
+					   build/temp/jqueryui/jquery.ui.draggable.js
 					   build/templates/jqueryui.tail.txt" />
 		</concat>
+		
+		<copy file="${TARGET_DIR}/plugins/jqueryui-1.8.js"
+			  tofile="${ROOT_DIR}/test/area/plugins/jqueryui-1.8.js" />
+		
 		<delete file="${temp.zip}" />
 	</target>
 </project>
