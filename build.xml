@@ -27,13 +27,11 @@
 		
 		<mkdir dir="${TARGET_DIR}/plugins" />
 		<concat destfile="${TARGET_DIR}/plugins/jqueryui-1.8.js" fixlastline="yes">
-			<filelist dir="${ROOT_DIR}"
-				files="build/templates/jqueryui.top.txt
-					   build/temp/jqueryui/jquery.ui.core.js
-					   build/temp/jqueryui/jquery.ui.widget.js
-					   build/temp/jqueryui/jquery.ui.mouse.js
-					   build/temp/jqueryui/jquery.ui.draggable.js
-					   build/templates/jqueryui.tail.txt" />
+			<filelist dir="${ROOT_DIR}" files="build/templates/jqueryui.top.txt" />
+			<fileset dir="${TEMP_DIR}/jqueryui">
+				<include name="*.js"/>
+			</fileset>
+			<filelist dir="${ROOT_DIR}" files="build/templates/jqueryui.tail.txt" />
 		</concat>
 		
 		<copy file="${TARGET_DIR}/plugins/jqueryui-1.8.js"
