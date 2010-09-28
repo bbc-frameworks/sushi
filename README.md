@@ -1,6 +1,6 @@
 # Sushi
 
-Sushi is a simple [Ant](http://ant.apache.org/) build intended to automate the packaging of Javascript code into [commonjs](http://wiki.commonjs.org/wiki/CommonJS) modules.
+Sushi is a simple [Ant](http://ant.apache.org/) build intended to automate the packaging of Javascript code into [commonjs](http://wiki.commonjs.org/wiki/CommonJS) compliant modules.
 
 Specifically, it peforms 3 tasks:
 
@@ -29,6 +29,14 @@ Define the `package` task and add use the `<sushi />` element to add new targets
     </project>
 
 Simply run with `ant`.
+
+After the build is complete, the packaged files are available in the `dist` directory.
+
+The target directory that the packages are built to can be configured by specifying the `TARGET_DIR` property.
+
+    ant -DTARGET_DIR=/some/other/path
+
+Sushi has been tested with Ant 1.6.5 and 1.7.1. The single dependency, [Ant-Contrib](http://ant-contrib.sourceforge.net/), is bundled with Sushi.
 
 ## Todo
 
