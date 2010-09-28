@@ -4,7 +4,7 @@ Sushi is a simple [Ant](http://ant.apache.org/) build intended to automate the p
 
 Specifically, it peforms 3 tasks:
 
-1. Download JavaScript from a URL (and unpack if and archive)
+1. Download JavaScript from a URL.
 2. Wrap the code to create a module definition
 3. Apply further patches (such as defining the module identifier).
 
@@ -29,3 +29,9 @@ Define the `package` task and add use the `<sushi />` element to add new targets
     </project>
 
 Simply run with `ant`.
+
+## Todo
+
+- Work out how to make the building from an archive process more generic
+- Look at a better way to store the configuration of the build (which sources to load and so on).
+- Consider making all build paths configurable (temp, templates etc)
