@@ -31,6 +31,7 @@
 				files="build/templates/jqueryui.top.txt
 					   build/temp/jqueryui/jquery.ui.core.js
 					   build/temp/jqueryui/jquery.ui.widget.js
+					   build/temp/jqueryui/jquery.ui.position.js
 					   build/temp/jqueryui/jquery.ui.mouse.js
 					   build/temp/jqueryui/jquery.ui.draggable.js
 					   build/templates/jqueryui.tail.txt" />
