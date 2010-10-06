@@ -88,4 +88,23 @@ QUnit.specify('Loading Javascript modules.', function() {
 			);
 		});
 	});
+	
+	describe('Depending on a CSS file.', function() {
+		it('should be possible to depend on a CSS file', function() {
+			expect(3);
+			
+			stop(3000); // start asynchronous test
+			
+			require(
+				{ baseUrl: 'mock' },
+				['jquery-1.4', 'a'],
+				function($, a) {
+					assert(a).isDefined('the required module should be passed into the callback');
+					assert(a.name).equals('Bee', 'the required module should have access to its dependencies data');
+					assert( $('#a').css('z-index') ).equals(12345, 'the dependent css should be applied when the callback is evaluated');
+					start(); // end asynchronous test
+				}
+			);
+		});
+	});
 });
