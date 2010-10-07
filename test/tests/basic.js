@@ -6,7 +6,7 @@ QUnit.specify('Loading Javascript modules.', function() {
 		it('should pass a jQuery object into the callback', function() {
 			expect(9);
 			
-			stop(3000); // start asynchronous test
+			stop(5000); // start asynchronous test
 			
 			require(
 				{ baseUrl: 'area' },
@@ -43,7 +43,7 @@ QUnit.specify('Loading Javascript modules.', function() {
 		it('should be possible to modify the jQuery object with a plugin', function() {
 			expect(4);
 			
-			stop(3000); // start asynchronous test
+			stop(5000); // start asynchronous test
 			
 			require(
 				{ baseUrl: 'area' },
@@ -69,7 +69,7 @@ QUnit.specify('Loading Javascript modules.', function() {
 		it('should be possible to modify the jQuery object with jQueryUI extensions', function() {
 			expect(2);
 			
-			stop(3000); // start asynchronous test
+			stop(5000); // start asynchronous test
 			
 			require(
 				{ baseUrl: 'area' },
@@ -93,7 +93,7 @@ QUnit.specify('Loading Javascript modules.', function() {
 		it('should be possible to depend on a CSS file', function() {
 			expect(3);
 			
-			stop(3000); // start asynchronous test
+			stop(5000); // start asynchronous test
 			
 			require(
 				{ baseUrl: 'mock' },

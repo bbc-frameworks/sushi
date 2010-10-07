@@ -1,6 +1,6 @@
 require.def(
 	'a',
-	['b', 'cssp!a.css?a'],
+	['b', 'cssp!a.css#a'],
 	
 	function(b) {
 		return {
