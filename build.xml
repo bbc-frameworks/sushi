@@ -6,8 +6,18 @@
 	
 	<target name="package">
 	
-		<sushi source="${REQUIRE_URL}" id="require" />
-		<sushi source="${JQUERY_URL}"  id="jquery-1.4" />
+		<!--sushi source="${REQUIRE_URL}" id="require" /-->
+		<sushi source="${JQUERY_URL}" id="jquery-1.4" />
+		
+		<get dest="${TEMP_DIR}/require.js" src="${REQUIRE_URL}" />
+		<get dest="${TEMP_DIR}/cssp.js" src="${CSSP_URL}" />
+		<concat destfile="${TARGET_DIR}/require.js" fixlastline="yes">
+			<filelist dir="${ROOT_DIR}"
+				files="build/templates/require.top.txt
+						${TEMP_DIR}/require.js
+						${TEMP_DIR}/cssp.js
+						build/templates/require.tail.txt" />
+		</concat>
 		
 		<delete dir="${TEMP_DIR}/jqueryui" />
 		<mkdir dir="${TEMP_DIR}/jqueryui" />
