@@ -3,4 +3,20 @@
 /*******************************************************************************
 	BBC SUSHI: bottom
  ******************************************************************************/
- 
+
+require.addPaths = function() {
+	var paths = {},
+		path,
+		moduleIds;
+		
+	for (var i = 0, leni = arguments.length; i < leni; i += 2) {
+		path = arguments[i];
+		moduleIds = arguments[i + 1];
+		
+		for (var j = 0, lenj = moduleIds.length; j < lenj; j++) {
+			paths[moduleIds[j]] = path;
+		}
+	}
+	
+	require( {paths: paths} );
+}
